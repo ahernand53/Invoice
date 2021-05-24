@@ -23,7 +23,20 @@ namespace Invoice.Data.Repository
 
         public void Actualizar(T entity, int id)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+            {
+                throw new ArgumentException("Entity");
+            }
+
+            T existe = entities.Find(id);
+
+            if (existe != null)
+            {
+                _context.Entry(existe).CurrentValues.SetValues(entity);
+                _context.SaveChanges();
+            }
+
+            _context.SaveChanges();
         }
 
         public T Buscar(long id)
@@ -49,7 +62,12 @@ namespace Invoice.Data.Repository
 
         public void Insertar(T entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+            {
+                throw new ArgumentException("Entity");
+            }
+            entities.Add(entity);
+            _context.SaveChanges();
         }
 
         public IQueryable<T> Todos()

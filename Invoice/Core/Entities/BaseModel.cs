@@ -20,5 +20,11 @@ namespace Invoice.Core.Entities
         public DateTime FechaUltimaActualizacion { get; set; }
 
         public bool Eliminado { get; set; }
+
+        public BaseModel()
+        {
+            FechaCreacion = DateTime.UtcNow;
+            FechaUltimaActualizacion = DateTime.UtcNow;
+        }
     }
 }
