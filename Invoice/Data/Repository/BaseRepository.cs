@@ -1,5 +1,5 @@
-﻿using Invoice.Core.Entities;
-using Invoice.Core.Interfaces;
+﻿using Invoice.Core.Entity;
+using Invoice.Core.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

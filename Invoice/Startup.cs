@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Invoice.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,6 +35,24 @@ namespace Invoice
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => options.LoginPath = "/Login");
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images")));
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddMvc().AddJsonOptions(
+                connection => connection.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddMvcCore(
+                options => 
+                {
+                    options.RequireHttpsPermanent = true;
+                    options.RespectBrowserAcceptHeader = true;
+                })
+                .AddFormatterMappings()
+                .AddJsonFormatters();
+            services.AddDbContext<InvoiceDbContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

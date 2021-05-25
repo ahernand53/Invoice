@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Invoice.Core.Entities
+namespace Invoice.Core.Entity
 {
     public class BaseModel
     {
