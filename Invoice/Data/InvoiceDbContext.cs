@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Invoice.Core.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace Invoice.Data
     {
         public InvoiceDbContext(DbContextOptions<InvoiceDbContext> options) : base(options)
         { }
+
+        public DbSet<CustomerModel> Customers { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Invoice.Data;
+﻿using Invoice.Core.Interface;
+using Invoice.Data;
+using Invoice.Data.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -53,6 +55,9 @@ namespace Invoice
                 .AddJsonFormatters();
             services.AddDbContext<InvoiceDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            // Inyectando los repositorios
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

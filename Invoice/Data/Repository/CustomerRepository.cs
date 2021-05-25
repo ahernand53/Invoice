@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Invoice.Data.Repository
 {
-    public class CustomerRespository : BaseRepository<CustomerModel>, ICustomerRepository
+    public class CustomerRepository : BaseRepository<CustomerModel>, ICustomerRepository
     {
 
-        public CustomerRespository(InvoiceDbContext context): base(context)
+        public CustomerRepository(InvoiceDbContext context): base(context)
         {
 
         }
