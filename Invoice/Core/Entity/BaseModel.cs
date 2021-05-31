@@ -14,9 +14,11 @@ namespace Invoice.Core.Entity
         public int ID { get; set; }
 
         [Column(TypeName = "dateTime2")]
+        [DataType(DataType.DateTime)]
         public DateTime FechaCreacion { get; set; }
 
         [Column(TypeName = "dateTime2")]
+        [DataType(DataType.DateTime)]
         public DateTime FechaUltimaActualizacion { get; set; }
 
         public bool Eliminado { get; set; }

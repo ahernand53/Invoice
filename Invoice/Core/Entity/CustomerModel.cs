@@ -12,7 +12,6 @@ namespace Invoice.Core.Entity
         public string Nombre { get; set; }
 
         [Required]
-        [EmailAddress]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
